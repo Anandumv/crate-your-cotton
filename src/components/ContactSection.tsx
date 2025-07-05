@@ -1,9 +1,23 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Phone, Mail } from "lucide-react";
 
 const ContactSection = () => {
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/917012939374', '_blank');
+  };
+
+  const handleCall = () => {
+    window.open('tel:+917012939374', '_blank');
+  };
+
+  const handleEmail = () => {
+    window.open('mailto:anandumv@gmail.com', '_blank');
+  };
+
   return (
     <section className="py-24 bg-muted/30">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,15 +95,26 @@ const ContactSection = () => {
               <Button size="lg" className="flex-1">
                 Send Inquiry
               </Button>
-              <Button variant="outline" size="lg" className="flex-1">
+              <Button variant="outline" size="lg" className="flex-1" onClick={handleWhatsApp}>
                 WhatsApp Us
               </Button>
             </div>
           </form>
           
           <div className="text-center mt-8 pt-8 border-t border-border">
-            <p className="text-muted-foreground font-inter">
-              Email us directly: <a href="mailto:hello@cottoncrate.in" className="text-primary font-medium">hello@cottoncrate.in</a>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
+              <Button variant="outline" size="sm" onClick={handleCall} className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                Call Us
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleEmail} className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                Email Us
+              </Button>
+            </div>
+            <p className="text-muted-foreground font-inter text-sm">
+              Email: <a href="mailto:anandumv@gmail.com" className="text-primary font-medium">anandumv@gmail.com</a> | 
+              Phone: <a href="tel:+917012939374" className="text-primary font-medium">+91 7012939374</a>
             </p>
           </div>
         </div>
