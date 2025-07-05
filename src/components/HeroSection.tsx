@@ -1,13 +1,19 @@
-
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   const handleGetSample = () => {
     window.open('https://wa.me/917012939374?text=Hi! I would like to get a sample from Cotton Crate.', '_blank');
   };
 
   const handleContactUs = () => {
     window.open('https://wa.me/917012939374?text=Hi! I would like to know more about Cotton Crate services.', '_blank');
+  };
+
+  const handleCreateMockup = () => {
+    navigate('/mockup');
   };
 
   return (
@@ -31,6 +37,9 @@ const HeroSection = () => {
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 py-6" onClick={handleContactUs}>
               Contact Us
+            </Button>
+            <Button variant="secondary" size="lg" className="text-lg px-8 py-6" onClick={handleCreateMockup}>
+              Create Mockup
             </Button>
           </div>
         </div>
