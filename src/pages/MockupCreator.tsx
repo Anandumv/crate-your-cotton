@@ -3,10 +3,16 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Upload } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Upload, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const MockupCreator = () => {
+  const navigate = useNavigate();
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState('');
+  const [requirements, setRequirements] = useState('');
+  const [contactName, setContactName] = useState('');
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -19,13 +25,43 @@ const MockupCreator = () => {
     }
   };
 
-  const handleGetQuote = () => {
-    window.open('https://wa.me/917012939374?text=Hi! I would like to get a quote for my design mockup.', '_blank');
+  const handleSendToWhatsApp = () => {
+    let message = `Hi! I would like to get a quote for my design mockup.\n\n`;
+    
+    if (contactName) {
+      message += `Name: ${contactName}\n`;
+    }
+    
+    if (quantity) {
+      message += `Quantity needed: ${quantity}\n`;
+    }
+    
+    if (requirements) {
+      message += `Additional requirements: ${requirements}\n`;
+    }
+    
+    message += `\nI have uploaded my design and would like to discuss printing options.`;
+    
+    window.open(`https://wa.me/917012939374?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  const handleGoBack = () => {
+    navigate('/');
   };
 
   return (
     <div className="min-h-screen bg-background px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-6xl mx-auto">
+        {/* Back Button */}
+        <Button 
+          variant="ghost" 
+          onClick={handleGoBack}
+          className="mb-6 hover:bg-muted/50"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Button>
+
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-bold font-satoshi text-foreground mb-4">
             Create Your <span className="text-primary">Mockup</span>
@@ -72,9 +108,46 @@ const MockupCreator = () => {
                     className="max-w-full h-auto max-h-48 mx-auto"
                   />
                 </div>
-                <Button onClick={handleGetQuote} className="w-full" size="lg">
-                  Get Quote for This Design
-                </Button>
+                
+                {/* Quote Form */}
+                <div className="space-y-4 border rounded-lg p-6 bg-muted/10">
+                  <h4 className="text-md font-medium">Get Your Quote</h4>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-name">Your Name</Label>
+                    <Input
+                      id="contact-name"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="quantity">Quantity Needed</Label>
+                    <Input
+                      id="quantity"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      placeholder="e.g., 50 pieces"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="requirements">Additional Requirements</Label>
+                    <Textarea
+                      id="requirements"
+                      value={requirements}
+                      onChange={(e) => setRequirements(e.target.value)}
+                      placeholder="Size preferences, colors, delivery timeline, etc."
+                      className="min-h-[80px]"
+                    />
+                  </div>
+                  
+                  <Button onClick={handleSendToWhatsApp} className="w-full" size="lg">
+                    Send Quote Request via WhatsApp
+                  </Button>
+                </div>
               </div>
             )}
           </div>
