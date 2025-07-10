@@ -26,30 +26,30 @@ const MockupCreator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-background px-4 sm:px-6 lg:px-8 py-8">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         <Button 
           variant="ghost" 
           onClick={handleGoBack}
-          className="mb-6 hover:bg-muted/50"
+          className="mb-8 hover:bg-muted/50 font-medium"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home
         </Button>
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold font-satoshi text-foreground mb-4">
-            Create Your <span className="text-primary">Mockup</span>
+          <h1 className="text-4xl md:text-5xl font-display gradient-text mb-4">
+            Create Your Mockup
           </h1>
-          <p className="text-xl text-muted-foreground font-inter">
+          <p className="text-xl text-muted-foreground font-body max-w-2xl mx-auto">
             Upload your design and see how it looks on our premium cotton T-shirts
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Upload Section */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <UploadSection 
               onFileUpload={setUploadedImage} 
               uploadedImage={uploadedImage} 
